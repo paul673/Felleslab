@@ -114,17 +114,18 @@ def meanDataLst(dlist):
     return lstDict
         
 def plot(plotKeys,lstlistDict):
-    
+    color = [[(255/255,0/255,0/255),(170/255,0/255,0/255)],[(0/255,255/255,0/255),(0/255,170/255,0/255)],[(0/255,0/255,255/255),(0/255,0/255,170/255)],[(255/255,255/255,0/255),(170/255,170/255,0/255)],[(0/255,255/255,255/255),(0/255,170/255,170/255)]]
     for d in plotKeys:
         for i in range(len(d["y"])):
             if d["type"] == "plot":
-                for listDict in lstlistDict:
-                    plt.plot(listDict[d["x"][0]], listDict[d["y"][i]], label=d["y"][i])
+                for j, listDict in enumerate(lstlistDict):
+                    parallel = listDict["filename"][0].replace("_1.csv", "").replace("1.csv", "").replace("_", " ")
+                    plt.plot(listDict[d["x"][0]], listDict[d["y"][i]], label=d["label"][i]+" "+parallel, color=color[j][i])
             elif d["type"] == "scatter":
                 for listDict in lstlistDict:
                     plt.scatter(listDict[d["x"][0]], listDict[d["y"][i]])
-        plt.xlabel(d["x"][0])
-        plt.ylabel(d["y"][i])
+        plt.xlabel(d["axis"][0])
+        plt.ylabel(d["axis"][1])
         plt.legend()
         plt.grid()
         plt.show()
@@ -132,11 +133,11 @@ def plot(plotKeys,lstlistDict):
 def plotLstKeys():
     #{"x": [""], "y":[""]}
     return [
-        {"x": ["Pressure ratio"], "y":["O_2  Permeate", "N_2  Permeate"],"type": "plot"},
-        {"x": ["Pressure ratio"], "y":["Recovery O_2", "Recovery N_2"],"type": "plot"},
-        {"x": ["Cut rate"], "y":["O_2  Permeate", "N_2  Permeate"],"type": "plot"},
-        {"x": ["Cut rate"], "y":["Recovery O_2", "Recovery N_2"], "type": "plot"},
-        {"x": ["O_2  Permeate"], "y":["Recovery O_2", "Recovery N_2"], "type": "plot"}
+        {"x": ["Pressure ratio"], "y":["O_2  Permeate", "N_2  Permeate"],"type": "plot", "label": [r"O$_2$  Permeate", r"N$_2$  Permeate"], "axis": [r"Pressure ratio",r"Permeate molar fraction"]},
+        {"x": ["Pressure ratio"], "y":["Recovery O_2", "Recovery N_2"],"type": "plot", "label": [r"Recovery O$_2$", r"Recovery N$_2$"], "axis": [r"Pressure ratio",r"Recovery"]},
+        {"x": ["Cut rate"], "y":["O_2  Permeate", "N_2  Permeate"],"type": "plot", "label": [r"O$_2$  Permeate", r"N$_2$  Permeate"], "axis":  [r"Cut rate",r"Permeate molar fraction"]},
+        {"x": ["Cut rate"], "y":["Recovery O_2", "Recovery N_2"], "type": "plot", "label": [r"Recovery O$_2$", r"Recovery N$_2$"], "axis": [r"Cut rate",r"Recovery"]},
+        {"x": ["O_2  Permeate"], "y":["Recovery O_2", "Recovery N_2"], "type": "plot", "label": [r"Recovery O$_2$", r"Recovery N$_2$"], "axis": [r"O$_2$ Permeate",r"Recovery"]}
         ]
 
 def createDataDict():
@@ -168,7 +169,7 @@ def main():
             
     
         
-
+    
     plotKeys = plotLstKeys()
     plot(plotKeys,lstlistDict)
     
