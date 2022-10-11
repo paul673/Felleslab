@@ -113,14 +113,16 @@ def meanDataLst(dlist):
             lstDict[key].append(d[key])
     return lstDict
         
-def plot(plotKeys,listDict):
+def plot(plotKeys,lstlistDict):
     
     for d in plotKeys:
         for i in range(len(d["y"])):
             if d["type"] == "plot":
-                plt.plot(listDict[d["x"][0]], listDict[d["y"][i]], label=d["y"][i])
+                for listDict in lstlistDict:
+                    plt.plot(listDict[d["x"][0]], listDict[d["y"][i]], label=d["y"][i])
             elif d["type"] == "scatter":
-                plt.scatter(listDict[d["x"][0]], listDict[d["y"][i]])
+                for listDict in lstlistDict:
+                    plt.scatter(listDict[d["x"][0]], listDict[d["y"][i]])
         plt.xlabel(d["x"][0])
         plt.ylabel(d["y"][i])
         plt.legend()
@@ -143,8 +145,8 @@ def createDataDict():
             d = meanDict(df,filedict[key][count])
             d = addToDict(d)
             dlst.append(d)
-        for i in dlst:
-            print(i)
+        #for i in dlst:
+            #print(i)
         dDict[key] = dlst
         lstlistDict.append(meanDataLst(dlst))
     return lstlistDict
@@ -155,7 +157,7 @@ def main():
         
 
     plotKeys = plotLstKeys()
-    plot(plotKeys,lstlistDict[0])
+    plot(plotKeys,lstlistDict)
     
     #example()
     
