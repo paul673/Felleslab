@@ -131,7 +131,13 @@ def plot(plotKeys,lstlistDict):
     
 def plotLstKeys():
     #{"x": [""], "y":[""]}
-    return [{"x": ["Pressure ratio"], "y":["O_2  Permeate", "N_2  Permeate"], "type": "plot"},{"x": ["Pressure ratio"], "y":["Recovery O_2", "Recovery N_2"], "type": "plot"}, {"x": ["Cut rate"], "y":["O_2  Permeate", "N_2  Permeate"], "type": "plot"}, {"x": ["Cut rate"], "y":["Recovery O_2", "Recovery N_2"], "type": "plot"},{"x": ["O_2  Permeate"], "y":["Recovery O_2", "Recovery N_2"], "type": "plot"}]
+    return [
+        {"x": ["Pressure ratio"], "y":["O_2  Permeate", "N_2  Permeate"],"type": "plot"},
+        {"x": ["Pressure ratio"], "y":["Recovery O_2", "Recovery N_2"],"type": "plot"},
+        {"x": ["Cut rate"], "y":["O_2  Permeate", "N_2  Permeate"],"type": "plot"},
+        {"x": ["Cut rate"], "y":["Recovery O_2", "Recovery N_2"], "type": "plot"},
+        {"x": ["O_2  Permeate"], "y":["Recovery O_2", "Recovery N_2"], "type": "plot"}
+        ]
 
 def createDataDict():
     dDict = {}
