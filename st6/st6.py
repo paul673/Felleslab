@@ -153,6 +153,13 @@ def createDataDict():
 
 def main():
     lstlistDict = createDataDict()
+    listDictSerie={}
+    for i, d in enumerate(lstlistDict):
+        if "single" in d["filename"][0]:
+            listDictSerie = lstlistDict.pop(i)
+            
+    print(lstlistDict)
+            
     
         
 
