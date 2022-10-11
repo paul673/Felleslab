@@ -10,14 +10,19 @@ def readData(filename):
     return pd.read_csv(filename)
     
     
-def iterateData(directorys="single"):
-    dflst = []
-    filelst = []
-    for filename in os.listdir("./data/"+directory):
-        print(f"Reading {filename} ")
-        dflst.append(readData("./data/"+directory+"/"+filename))
-        filelst.append(filename)
-    return dflst, filelst
+def iterateData():
+    dfdict = {}
+    filedict = {}
+    for directory in os.listdir("./data/"):
+        dflst = []
+        filelst = []
+        for filename in os.listdir("./data/"+directory):
+            print(f"Reading {filename} ")
+            dflst.append(readData("./data/"+directory+"/"+filename))
+            filelst.append(filename)
+        dfdict[directory] = dflst
+        filedict[directory] = filelst
+    return dfdict, filedict
 
 def meanDict(df, filename, slicedf=None, example=False):
     if not example:
@@ -126,21 +131,31 @@ def plotLstKeys():
     #{"x": [""], "y":[""]}
     return [{"x": ["Pressure ratio"], "y":["O_2  Permeate", "N_2  Permeate"], "type": "plot"},{"x": ["Pressure ratio"], "y":["Recovery O_2", "Recovery N_2"], "type": "plot"}, {"x": ["Cut rate"], "y":["O_2  Permeate", "N_2  Permeate"], "type": "plot"}, {"x": ["Cut rate"], "y":["Recovery O_2", "Recovery N_2"], "type": "plot"},{"x": ["O_2  Permeate"], "y":["Recovery O_2", "Recovery N_2"], "type": "plot"}]
 
-    
+def createDataDict():
+    dDict = {}
+    lstlistDict = []
+    dfdict, filedict = iterateData()
+    print(filedict)
+    for key, dflist in dfdict.items():
+        dlst = []
+        
+        for count, df in enumerate(dflist):
+            d = meanDict(df,filedict[key][count])
+            d = addToDict(d)
+            dlst.append(d)
+        for i in dlst:
+            print(i)
+        dDict[key] = dlst
+        lstlistDict.append(meanDataLst(dlst))
+    return lstlistDict
 
 def main():
-    dlst = []
-    dflist, filelst = iterateData(directory="parallel_4")
-    for count, df in enumerate(dflist):
-        d = meanDict(df,filelst[count])
-        d = addToDict(d)
-        dlst.append(d)
-    for i in dlst:
-        print(i)
+    lstlistDict = createDataDict()
+    
         
-    listDict = meanDataLst(dlst)
+
     plotKeys = plotLstKeys()
-    plot(plotKeys,listDict)
+    plot(plotKeys,lstlistDict[0])
     
     #example()
     
