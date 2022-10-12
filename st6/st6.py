@@ -144,7 +144,7 @@ def createDataDict():
     dDict = {}
     lstlistDict = []
     dfdict, filedict = iterateData()
-    print(filedict)
+    #print(filedict)
     for key, dflist in dfdict.items():
         dlst = []
         
@@ -165,7 +165,7 @@ def main():
         if "single" in d["filename"][0]:
             listDictSerie = lstlistDict.pop(i)
             
-    print(lstlistDict)
+    #print(lstlistDict)
             
     
         
