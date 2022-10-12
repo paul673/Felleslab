@@ -181,7 +181,7 @@ def main():
             listDictParallel4 = lstlistDict[i]
         elif "parallel_3" in d["filename"][0]:
             listDictParallel3 = lstlistDict[i]
-    scatterParallels(listDictParallel4)  
+    scatterParallels(listDictSingle)  
     #print(lstlistDict)
             
     
