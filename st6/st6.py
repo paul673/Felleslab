@@ -158,13 +158,30 @@ def createDataDict():
         lstlistDict.append(meanDataLst(dlst))
     return lstlistDict
 
+def scatterParallels(listDictSerie):
+    for key, value in listDictSerie.items():
+        if type(value[0]) == np.float64:
+            print(key, value, "mean: ",round(np.mean(value),5), "std: ", round(np.std(value),5))
+        else:
+            print(key, value)
+    return
+
 def main():
     lstlistDict = createDataDict()
-    listDictSerie={}
+    listDictSingle={}
+    listDictSerie ={}
+    listDictParallel3 ={}
+    listDictParallel4 ={}
     for i, d in enumerate(lstlistDict):
         if "single" in d["filename"][0]:
-            listDictSerie = lstlistDict.pop(i)
-            
+            listDictSingle = lstlistDict.pop(i)
+        elif "serie" in d["filename"][0]:
+            listDictSerie = lstlistDict[i]
+        elif "parallel_4" in d["filename"][0]:
+            listDictParallel4 = lstlistDict[i]
+        elif "parallel_3" in d["filename"][0]:
+            listDictParallel3 = lstlistDict[i]
+    scatterParallels(listDictParallel4)  
     #print(lstlistDict)
             
     
