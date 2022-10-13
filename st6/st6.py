@@ -133,11 +133,14 @@ def plot(plotKeys,lstlistDict):
 def plotLstKeys():
     #{"x": [""], "y":[""]}
     return [
-        {"x": ["Pressure ratio"], "y":["O_2  Permeate", "N_2  Permeate"],"type": "plot", "label": [r"O$_2$  Permeate", r"N$_2$  Permeate"], "axis": [r"Pressure ratio",r"Permeate molar fraction"]},
+        {"x": ["Pressure ratio"], "y":["O_2  Permeate"],"type": "plot", "label": [r"O$_2$  Permeate"], "axis": [r"Pressure ratio",r"O$_2$  Permeate (purity)"]},
+        {"x": ["Pressure ratio"], "y":["N_2  Retentate"],"type": "plot", "label": [r"N$_2$  Retentate"], "axis": [r"Pressure ratio",r"N$_2$  Retentate (purity)"]},
         {"x": ["Pressure ratio"], "y":["Recovery O_2", "Recovery N_2"],"type": "plot", "label": [r"Recovery O$_2$", r"Recovery N$_2$"], "axis": [r"Pressure ratio",r"Recovery"]},
-        {"x": ["Cut rate"], "y":["O_2  Permeate", "N_2  Permeate"],"type": "plot", "label": [r"O$_2$  Permeate", r"N$_2$  Permeate"], "axis":  [r"Cut rate",r"Permeate molar fraction"]},
+        {"x": ["Cut rate"], "y":["O_2  Permeate"],"type": "plot", "label": [r"O$_2$  Permeate"], "axis":  [r"Cut rate",r"O$_2$  Permeate (purity)"]},
+        {"x": ["Cut rate"], "y":["N_2  Retentate"],"type": "plot", "label": [r"N$_2$ Retentate"], "axis":  [r"Cut rate",r"N$_2$ Retentate (purity)"]},
         {"x": ["Cut rate"], "y":["Recovery O_2", "Recovery N_2"], "type": "plot", "label": [r"Recovery O$_2$", r"Recovery N$_2$"], "axis": [r"Cut rate",r"Recovery"]},
-        {"x": ["O_2  Permeate"], "y":["Recovery O_2", "Recovery N_2"], "type": "plot", "label": [r"Recovery O$_2$", r"Recovery N$_2$"], "axis": [r"O$_2$ Permeate",r"Recovery"]}
+        {"x": ["O_2  Permeate"], "y":["Recovery O_2"], "type": "plot", "label": [r"Recovery O$_2$"], "axis": [r"O$_2$ Permeate (purity)",r"Recovery O$_2$"]},
+        {"x": ["N_2  Retentate"], "y":["Recovery N_2"], "type": "plot", "label": [r"Recovery N$_2$"], "axis": [r"N$_2$ Retentate (purity)",r"Recovery N$_2$"]}
         ]
 
 def createDataDict():
