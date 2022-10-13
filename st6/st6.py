@@ -120,10 +120,14 @@ def plot(plotKeys,lstlistDict):
             if d["type"] == "plot":
                 for j, listDict in enumerate(lstlistDict):
                     parallel = listDict["filename"][0].replace("_1.csv", "").replace("1.csv", "").replace("_", " ")
-                    plt.plot(listDict[d["x"][0]], listDict[d["y"][i]], label=d["label"][i]+" "+parallel, color=color[j][i])
+                    if "single" in parallel:
+                        plt.scatter(listDict[d["x"][0]], listDict[d["y"][i]], label=d["label"][i]+" "+parallel, color=color[j][i])
+                    else:
+                        plt.plot(listDict[d["x"][0]], listDict[d["y"][i]], label=d["label"][i]+" "+parallel, color=color[j][i])
             elif d["type"] == "scatter":
                 for listDict in lstlistDict:
-                    plt.scatter(listDict[d["x"][0]], listDict[d["y"][i]])
+                    parallel = listDict["filename"][0].replace("_1.csv", "").replace("1.csv", "").replace("_", " ")
+                    plt.scatter(listDict[d["x"][0]], listDict[d["y"][i]], label=d["label"][i]+" "+parallel, color=color[j][i])
         plt.xlabel(d["axis"][0])
         plt.ylabel(d["axis"][1])
         plt.legend()
@@ -177,7 +181,8 @@ def main():
     listDictParallel4 ={}
     for i, d in enumerate(lstlistDict):
         if "single" in d["filename"][0]:
-            listDictSingle = lstlistDict.pop(i)
+            #listDictSingle = lstlistDict.pop(i)
+            listDictSingle = lstlistDict[i]
         elif "serie" in d["filename"][0]:
             listDictSerie = lstlistDict[i]
         elif "parallel_4" in d["filename"][0]:
